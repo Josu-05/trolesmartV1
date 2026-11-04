@@ -1,27 +1,34 @@
-FROM php:8.2-cli
-
-WORKDIR /app
-
-COPY . .
+FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y \
-    unzip \
     git \
-    libzip-dev \
-    libicu-dev
+    unzip \
+    libicu-dev \
+    libzip-dev
 
 RUN docker-php-ext-install \
+    mysqli \
     pdo \
     pdo_mysql \
-    mysqli \
     intl
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
+WORKDIR /var/www/html
+
+COPY . .
+
 RUN composer install --no-dev --optimize-autoloader
 
-ENV PORT=10000
+RUN chmod -R 777 writable
 
-EXPOSE 10000
+RUN a2enmod rewrite
 
-CMD ["php", "spark", "serve", "--host=0.0.0.0", "--port=10000"]
+ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+
+RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
+    /etc/apache2/sites-available/*.conf
+
+RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' \
+    /etc/apache2/apache2.conf \
+    /etc/apache2/conf-available/*.conf
