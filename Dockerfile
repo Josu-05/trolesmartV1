@@ -7,9 +7,14 @@ COPY . .
 RUN apt-get update && apt-get install -y \
     unzip \
     git \
-    libzip-dev
+    libzip-dev \
+    libicu-dev
 
-RUN docker-php-ext-install pdo pdo_mysql mysqli
+RUN docker-php-ext-install \
+    pdo \
+    pdo_mysql \
+    mysqli \
+    intl
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
