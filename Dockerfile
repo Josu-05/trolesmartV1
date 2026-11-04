@@ -20,6 +20,8 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 RUN composer install --no-dev --optimize-autoloader
 
+ENV PORT=10000
+
 EXPOSE 10000
 
-CMD php spark serve --host=0.0.0.0 --port=${PORT:-10000}
+CMD ["sh", "-c", "php spark serve --host=0.0.0.0 --port=${PORT}"]
