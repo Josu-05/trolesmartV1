@@ -1,69 +1,320 @@
-# CodeIgniter 4 Application Starter
+# 🚎 TroleSmart V1
 
-## What is CodeIgniter?
+Sistema web de gestión operativa para la administración de rutas, estaciones y unidades del sistema Trolebús.
 
-CodeIgniter is a PHP full-stack web framework that is light, fast, flexible and secure.
-More information can be found at the [official site](https://codeigniter.com).
+---
 
-This repository holds a composer-installable app starter.
-It has been built from the
-[development repository](https://github.com/codeigniter4/CodeIgniter4).
+# 📋 Descripción
 
-More information about the plans for version 4 can be found in [CodeIgniter 4](https://forum.codeigniter.com/forumdisplay.php?fid=28) on the forums.
+TroleSmart es una aplicación desarrollada con CodeIgniter 4 y MySQL que permite gestionar la información operativa de una red de transporte público.
 
-You can read the [user guide](https://codeigniter.com/user_guide/)
-corresponding to the latest version of the framework.
+La plataforma centraliza la administración de:
 
-## Installation & updates
+- Rutas
+- Estaciones
+- Relación Ruta-Estación
+- Unidades de transporte
 
-`composer create-project codeigniter4/appstarter` then `composer update` whenever
-there is a new release of the framework.
+Además, permite definir recorridos mediante un orden de paradas y asignar unidades a rutas específicas dentro del sistema.
 
-When updating, check the release notes to see if there are any changes you might need to apply
-to your `app` folder. The affected files can be copied or merged from
-`vendor/codeigniter4/framework/app`.
+---
 
-## Setup
+# 🎯 Objetivo
 
-Copy `env` to `.env` and tailor for your app, specifically the baseURL
-and any database settings.
+Desarrollar una plataforma administrativa que permita organizar y gestionar la información operativa de una red de transporte público, estableciendo una base sólida para futuras funcionalidades relacionadas con monitoreo, simulación y análisis de flota.
 
-## Important Change with index.php
+---
 
-`index.php` is no longer in the root of the project! It has been moved inside the *public* folder,
-for better security and separation of components.
+# 🛠 Tecnologías Utilizadas
 
-This means that you should configure your web server to "point" to your project's *public* folder, and
-not to the project root. A better practice would be to configure a virtual host to point there. A poor practice would be to point your web server to the project root and expect to enter *public/...*, as the rest of your logic and the
-framework are exposed.
+## Backend
 
-**Please** read the user guide for a better explanation of how CI4 works!
+- PHP 8+
+- CodeIgniter 4
 
-## Repository Management
+## Base de Datos
 
-We use GitHub issues, in our main repository, to track **BUGS** and to track approved **DEVELOPMENT** work packages.
-We use our [forum](http://forum.codeigniter.com) to provide SUPPORT and to discuss
-FEATURE REQUESTS.
+- MySQL
 
-This repository is a "distribution" one, built by our release preparation script.
-Problems with it can be raised on our forum, or as issues in the main repository.
+## Frontend
 
-## Server Requirements
+- HTML5
+- CSS
 
-PHP version 8.2 or higher is required, with the following extensions installed:
+## Control de Versiones
 
-- [intl](http://php.net/manual/en/intl.requirements.php)
-- [mbstring](http://php.net/manual/en/mbstring.installation.php)
+- Git
+- GitHub
 
-> [!WARNING]
-> - The end of life date for PHP 7.4 was November 28, 2022.
-> - The end of life date for PHP 8.0 was November 26, 2023.
-> - The end of life date for PHP 8.1 was December 31, 2025.
-> - If you are still using below PHP 8.2, you should upgrade immediately.
-> - The end of life date for PHP 8.2 will be December 31, 2026.
+---
 
-Additionally, make sure that the following extensions are enabled in your PHP:
+# 🗄 Modelo de Datos
 
-- json (enabled by default - don't turn it off)
-- [mysqlnd](http://php.net/manual/en/mysqlnd.install.php) if you plan to use MySQL
-- [libcurl](http://php.net/manual/en/curl.requirements.php) if you plan to use the HTTP\CURLRequest library
+## Rutas
+
+Representan los recorridos operativos del sistema.
+
+Ejemplos:
+
+- C1 Norte-Sur | El Labrador - El Recreo
+- C1 Sur-Norte | El Recreo - El Labrador
+- C2 Norte-Sur | El Labrador - Morán Valverde
+- C2 Sur-Norte | Morán Valverde - El Labrador
+- C3 Norte-Sur | Quitumbe - Colón
+- C3 Sur-Norte | Colón - Quitumbe
+
+---
+
+## Estaciones
+
+Representan las paradas de la red de transporte.
+
+El sistema incluye estaciones reales del corredor Trolebús, entre ellas:
+
+- El Labrador
+- La Y
+- El Recreo
+- Morán Valverde
+- Quitumbe
+
+---
+
+## Ruta - Estación
+
+Relaciona las estaciones pertenecientes a cada ruta.
+
+Cada relación contiene:
+
+- Ruta
+- Estación
+- Orden de Parada
+
+Esto permite reconstruir el recorrido completo de una ruta.
+
+---
+
+## Unidades
+
+Representan los vehículos que operan dentro del sistema.
+
+Cada unidad posee:
+
+- Código
+- Placa
+- Tipo
+- Capacidad
+- Estado
+- Ruta asignada
+- Estación base
+- Estación actual
+
+---
+
+# ⚙ Funcionalidades Implementadas
+
+## Gestión de Rutas
+
+- Crear rutas
+- Editar rutas
+- Eliminar rutas
+- Listar rutas
+
+---
+
+## Gestión de Estaciones
+
+- Crear estaciones
+- Editar estaciones
+- Eliminar estaciones
+- Listar estaciones
+
+---
+
+## Gestión Ruta-Estación
+
+- Crear asignaciones
+- Editar asignaciones
+- Eliminar asignaciones
+- Gestión del orden de parada
+- Visualización completa del recorrido
+
+---
+
+## Gestión de Unidades
+
+- Crear unidades
+- Editar unidades
+- Eliminar unidades
+- Asignar rutas
+- Gestionar estaciones base
+- Gestionar estaciones actuales
+- Gestionar estados operativos
+
+---
+
+# ✅ Validaciones Implementadas
+
+## Rutas
+
+- Nombre obligatorio
+- Tiempo estimado obligatorio
+- Tiempo estimado mayor a cero
+
+## Estaciones
+
+- Nombre obligatorio
+- Ubicación obligatoria
+
+## Ruta-Estación
+
+- Evita duplicar estaciones dentro de una misma ruta
+- Orden de parada mayor a cero
+
+## Unidades
+
+- Código único
+- Placa única
+- Capacidad mayor a cero
+- Ruta obligatoria
+- Estación base obligatoria
+- Estación actual obligatoria
+
+---
+
+# 🚎 Datos de Prueba Incluidos
+
+## Estaciones
+
+Corredor completo desde:
+
+- El Labrador
+
+hasta
+
+- Quitumbe
+
+incluyendo estaciones intermedias reales.
+
+---
+
+## Rutas
+
+- C1 Norte-Sur
+- C1 Sur-Norte
+- C2 Norte-Sur
+- C2 Sur-Norte
+- C3 Norte-Sur
+- C3 Sur-Norte
+
+---
+
+## Unidades
+
+Flota simulada compuesta por:
+
+- Unidades regulares
+- Unidades expresas
+
+Distribuidas entre:
+
+- El Labrador
+- El Recreo
+- Quitumbe
+
+---
+
+# 🚀 Instalación
+
+## Clonar repositorio
+
+```bash
+git clone https://github.com/Josu-05/trolesmartV1.git
+```
+
+## Ingresar al proyecto
+
+```bash
+cd trolesmartV1
+```
+
+## Instalar dependencias
+
+```bash
+composer install
+```
+
+## Configurar archivo de entorno
+
+Copiar:
+
+```text
+env
+```
+
+como:
+
+```text
+.env
+```
+
+y configurar los datos de conexión:
+
+```env
+database.default.hostname=
+database.default.database=
+database.default.username=
+database.default.password=
+```
+
+## Ejecutar servidor local
+
+```bash
+php spark serve
+```
+
+## Abrir aplicación
+
+```text
+http://localhost:8080
+```
+
+---
+
+# 📊 Estado Actual del Proyecto
+
+## Implementado
+
+- CRUD de Rutas
+- CRUD de Estaciones
+- CRUD de Ruta-Estación
+- CRUD de Unidades
+- Relaciones mediante claves foráneas
+- Orden de paradas
+- Validaciones de negocio
+- Dashboard principal
+
+---
+
+## Mejoras Futuras
+
+- Interfaz con Bootstrap
+- Dashboard analítico
+- Simulación de recorridos
+- Gestión automática de ubicación de unidades
+- Reportes operativos
+- Gestión de conductores
+- Estadísticas de operación
+
+---
+
+# 👨‍💻 Autor
+
+**Josue Martin Villalva Freire**
+
+Proyecto académico desarrollado utilizando CodeIgniter 4 y MySQL.
+
+---
+
+# 📌 Versión
+
+**TroleSmart V1**
