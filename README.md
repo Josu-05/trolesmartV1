@@ -6,14 +6,23 @@ Integrantes
 Josue Martin Villalva Freire
 Tecnologías utilizadas
 PHP 8.2
+
 CodeIgniter 4
+
 MySQL / TiDB Cloud
+
 HTML5
+
 CSS3
+
 Bootstrap
+
 Docker
+
 Git y GitHub
+
 Render
+
 Arquitectura MVC
 
 El proyecto implementa el patrón MVC:
@@ -25,9 +34,13 @@ Gestionan el acceso a los datos y la interacción con la base de datos.
 Ejemplos:
 
 RutaModel.php
+
 EstacionModel.php
+
 UnidadModel.php
+
 RutaEstacionModel.php
+
 Vistas
 
 Presentan la información al usuario.
@@ -35,8 +48,11 @@ Presentan la información al usuario.
 Ejemplos:
 
 rutas/index.php
+
 estaciones/index.php
+
 unidades/index.php
+
 Controladores
 
 Procesan las solicitudes y coordinan la comunicación entre modelos y vistas.
@@ -44,53 +60,85 @@ Procesan las solicitudes y coordinan la comunicación entre modelos y vistas.
 Ejemplos:
 
 RutaController.php
+
 EstacionController.php
+
 UnidadController.php
+
 RutaEstacionController.php
+
 Funcionalidades implementadas
+
 Gestión de Estaciones
 
 Permite:
 
 Crear estaciones
+
 Listar estaciones
+
 Editar estaciones
+
 Eliminar estaciones
+
 Datos administrados
+
 Nombre
+
 Ubicación
+
 Gestión de Rutas
 
 Permite:
 
 Crear rutas
+
 Listar rutas
+
 Editar rutas
+
 Eliminar rutas
+
 Datos administrados
+
 Nombre de la ruta
+
 Tiempo estimado
+
 Gestión Ruta - Estación
 
 Permite relacionar estaciones con rutas.
 
 Datos administrados
+
 Ruta
+
 Estación
+
 Orden dentro de la ruta
+
 Gestión de Unidades
 
 Permite administrar las unidades operativas del sistema.
 
 Datos administrados
+
 Código
+
 Placa
+
 Tipo
+
 Capacidad
+
 Estado
+
 Ruta asignada
+
 Estación base
+
 Estación actual
+
 Validaciones Back-End
 
 El sistema implementa validaciones del lado del servidor utilizando CodeIgniter.
@@ -98,8 +146,11 @@ El sistema implementa validaciones del lado del servidor utilizando CodeIgniter.
 Ejemplos:
 
 Validación de campos obligatorios.
+
 Validación de códigos únicos de unidades.
+
 Validación de placas únicas.
+
 Validación de integridad de relaciones entre tablas.
 
 Estas validaciones se ejecutan en el servidor antes de almacenar información en la base de datos.
@@ -109,6 +160,7 @@ Relaciones entre tablas
 El proyecto utiliza claves foráneas y relaciones entre entidades.
 
 Tablas principales
+
 estaciones
 
 Almacena la información de las estaciones.
