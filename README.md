@@ -1,320 +1,162 @@
-# 🚎 TroleSmart V1
+TroleSmart V1
 
-Sistema web de gestión operativa para la administración de rutas, estaciones y unidades del sistema Trolebús.
+Sistema de administración para la gestión de rutas, estaciones, unidades y relaciones operativas del sistema Trolebús, desarrollado con CodeIgniter 4 bajo el patrón de arquitectura MVC (Model - View - Controller).
 
----
+Integrantes
+Josue Martin Villalva Freire
+Tecnologías utilizadas
+PHP 8.2
+CodeIgniter 4
+MySQL / TiDB Cloud
+HTML5
+CSS3
+Bootstrap
+Docker
+Git y GitHub
+Render
+Arquitectura MVC
 
-# 📋 Descripción
+El proyecto implementa el patrón MVC:
 
-TroleSmart es una aplicación desarrollada con CodeIgniter 4 y MySQL que permite gestionar la información operativa de una red de transporte público.
+Modelos
 
-La plataforma centraliza la administración de:
-
-- Rutas
-- Estaciones
-- Relación Ruta-Estación
-- Unidades de transporte
-
-Además, permite definir recorridos mediante un orden de paradas y asignar unidades a rutas específicas dentro del sistema.
-
----
-
-# 🎯 Objetivo
-
-Desarrollar una plataforma administrativa que permita organizar y gestionar la información operativa de una red de transporte público, estableciendo una base sólida para futuras funcionalidades relacionadas con monitoreo, simulación y análisis de flota.
-
----
-
-# 🛠 Tecnologías Utilizadas
-
-## Backend
-
-- PHP 8+
-- CodeIgniter 4
-
-## Base de Datos
-
-- MySQL
-
-## Frontend
-
-- HTML5
-- CSS
-
-## Control de Versiones
-
-- Git
-- GitHub
-
----
-
-# 🗄 Modelo de Datos
-
-## Rutas
-
-Representan los recorridos operativos del sistema.
+Gestionan el acceso a los datos y la interacción con la base de datos.
 
 Ejemplos:
 
-- C1 Norte-Sur | El Labrador - El Recreo
-- C1 Sur-Norte | El Recreo - El Labrador
-- C2 Norte-Sur | El Labrador - Morán Valverde
-- C2 Sur-Norte | Morán Valverde - El Labrador
-- C3 Norte-Sur | Quitumbe - Colón
-- C3 Sur-Norte | Colón - Quitumbe
+RutaModel.php
+EstacionModel.php
+UnidadModel.php
+RutaEstacionModel.php
+Vistas
 
----
+Presentan la información al usuario.
 
-## Estaciones
+Ejemplos:
 
-Representan las paradas de la red de transporte.
+rutas/index.php
+estaciones/index.php
+unidades/index.php
+Controladores
 
-El sistema incluye estaciones reales del corredor Trolebús, entre ellas:
+Procesan las solicitudes y coordinan la comunicación entre modelos y vistas.
 
-- El Labrador
-- La Y
-- El Recreo
-- Morán Valverde
-- Quitumbe
+Ejemplos:
 
----
+RutaController.php
+EstacionController.php
+UnidadController.php
+RutaEstacionController.php
+Funcionalidades implementadas
+Gestión de Estaciones
 
-## Ruta - Estación
+Permite:
 
-Relaciona las estaciones pertenecientes a cada ruta.
+Crear estaciones
+Listar estaciones
+Editar estaciones
+Eliminar estaciones
+Datos administrados
+Nombre
+Ubicación
+Gestión de Rutas
 
-Cada relación contiene:
+Permite:
 
-- Ruta
-- Estación
-- Orden de Parada
+Crear rutas
+Listar rutas
+Editar rutas
+Eliminar rutas
+Datos administrados
+Nombre de la ruta
+Tiempo estimado
+Gestión Ruta - Estación
 
-Esto permite reconstruir el recorrido completo de una ruta.
+Permite relacionar estaciones con rutas.
 
----
+Datos administrados
+Ruta
+Estación
+Orden dentro de la ruta
+Gestión de Unidades
 
-## Unidades
+Permite administrar las unidades operativas del sistema.
 
-Representan los vehículos que operan dentro del sistema.
+Datos administrados
+Código
+Placa
+Tipo
+Capacidad
+Estado
+Ruta asignada
+Estación base
+Estación actual
+Validaciones Back-End
 
-Cada unidad posee:
+El sistema implementa validaciones del lado del servidor utilizando CodeIgniter.
 
-- Código
-- Placa
-- Tipo
-- Capacidad
-- Estado
-- Ruta asignada
-- Estación base
-- Estación actual
+Ejemplos:
 
----
+Validación de campos obligatorios.
+Validación de códigos únicos de unidades.
+Validación de placas únicas.
+Validación de integridad de relaciones entre tablas.
 
-# ⚙ Funcionalidades Implementadas
+Estas validaciones se ejecutan en el servidor antes de almacenar información en la base de datos.
 
-## Gestión de Rutas
+Relaciones entre tablas
 
-- Crear rutas
-- Editar rutas
-- Eliminar rutas
-- Listar rutas
+El proyecto utiliza claves foráneas y relaciones entre entidades.
 
----
+Tablas principales
+estaciones
 
-## Gestión de Estaciones
+Almacena la información de las estaciones.
 
-- Crear estaciones
-- Editar estaciones
-- Eliminar estaciones
-- Listar estaciones
+rutas
 
----
+Almacena la información de las rutas.
 
-## Gestión Ruta-Estación
+ruta_estacion
 
-- Crear asignaciones
-- Editar asignaciones
-- Eliminar asignaciones
-- Gestión del orden de parada
-- Visualización completa del recorrido
+Relaciona rutas con estaciones y controla el orden de recorrido.
 
----
+unidades
 
-## Gestión de Unidades
+Almacena las unidades operativas asignadas a rutas y estaciones.
 
-- Crear unidades
-- Editar unidades
-- Eliminar unidades
-- Asignar rutas
-- Gestionar estaciones base
-- Gestionar estaciones actuales
-- Gestionar estados operativos
+Implementación en formularios
 
----
+Las claves foráneas no son ingresadas manualmente.
 
-# ✅ Validaciones Implementadas
+Se utilizan listas desplegables (dropdowns) para seleccionar:
 
-## Rutas
+Ruta
+Estación base
+Estación actual
 
-- Nombre obligatorio
-- Tiempo estimado obligatorio
-- Tiempo estimado mayor a cero
+Esto garantiza la integridad referencial de los datos.
 
-## Estaciones
+Base de Datos
 
-- Nombre obligatorio
-- Ubicación obligatoria
+Base de datos desplegada en:
 
-## Ruta-Estación
+TiDB Cloud
 
-- Evita duplicar estaciones dentro de una misma ruta
-- Orden de parada mayor a cero
+Motor compatible con MySQL utilizado para almacenamiento persistente de la aplicación.
 
-## Unidades
+Control de Versiones
 
-- Código único
-- Placa única
-- Capacidad mayor a cero
-- Ruta obligatoria
-- Estación base obligatoria
-- Estación actual obligatoria
+El proyecto se encuentra versionado mediante Git.
 
----
+Repositorio:
 
-# 🚎 Datos de Prueba Incluidos
+Se han realizado commits durante todo el desarrollo para mantener trazabilidad y control de cambios.
 
-## Estaciones
+Despliegue
 
-Corredor completo desde:
+La aplicación se encuentra desplegada en la nube mediante Render.
 
-- El Labrador
+URL pública:
 
-hasta
-
-- Quitumbe
-
-incluyendo estaciones intermedias reales.
-
----
-
-## Rutas
-
-- C1 Norte-Sur
-- C1 Sur-Norte
-- C2 Norte-Sur
-- C2 Sur-Norte
-- C3 Norte-Sur
-- C3 Sur-Norte
-
----
-
-## Unidades
-
-Flota simulada compuesta por:
-
-- Unidades regulares
-- Unidades expresas
-
-Distribuidas entre:
-
-- El Labrador
-- El Recreo
-- Quitumbe
-
----
-
-# 🚀 Instalación
-
-## Clonar repositorio
-
-```bash
-git clone https://github.com/Josu-05/trolesmartV1.git
-```
-
-## Ingresar al proyecto
-
-```bash
-cd trolesmartV1
-```
-
-## Instalar dependencias
-
-```bash
-composer install
-```
-
-## Configurar archivo de entorno
-
-Copiar:
-
-```text
-env
-```
-
-como:
-
-```text
-.env
-```
-
-y configurar los datos de conexión:
-
-```env
-database.default.hostname=
-database.default.database=
-database.default.username=
-database.default.password=
-```
-
-## Ejecutar servidor local
-
-```bash
-php spark serve
-```
-
-## Abrir aplicación
-
-```text
-http://localhost:8080
-```
-
----
-
-# 📊 Estado Actual del Proyecto
-
-## Implementado
-
-- CRUD de Rutas
-- CRUD de Estaciones
-- CRUD de Ruta-Estación
-- CRUD de Unidades
-- Relaciones mediante claves foráneas
-- Orden de paradas
-- Validaciones de negocio
-- Dashboard principal
-
----
-
-## Mejoras Futuras
-
-- Interfaz con Bootstrap
-- Dashboard analítico
-- Simulación de recorridos
-- Gestión automática de ubicación de unidades
-- Reportes operativos
-- Gestión de conductores
-- Estadísticas de operación
-
----
-
-# 👨‍💻 Autor
-
-**Josue Martin Villalva Freire**
-
-Proyecto académico desarrollado utilizando CodeIgniter 4 y MySQL.
-
----
-
-# 📌 Versión
-
-**TroleSmart V1**
+https://trolesmartv1.onrender.com
