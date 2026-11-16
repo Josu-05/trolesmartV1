@@ -1,79 +1,122 @@
-<?php if(session()->getFlashdata('success')): ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Unidades</title>
 
-    <p style="color:green;">
-        <?= session()->getFlashdata('success') ?>
-    </p>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
 
-<?php endif; ?>
+<body class="bg-light">
 
-<?php if(session()->getFlashdata('error')): ?>
+<div class="container mt-4">
 
-    <p style="color:red;">
-        <?= session()->getFlashdata('error') ?>
-    </p>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<?php endif; ?>
+        <h1>🚌 Listado de Unidades</h1>
 
-<h1>Listado de Unidades</h1>
+        <div>
 
-<a href="/unidades/create">
-    Nueva Unidad
-</a>
-
-<br><br>
-
-<table border="1" cellpadding="8">
-
-    <tr>
-        <th>ID</th>
-        <th>Código</th>
-        <th>Placa</th>
-        <th>Tipo</th>
-        <th>Capacidad</th>
-        <th>Estado</th>
-        <th>Estación</th>
-        <th>Acciones</th>
-    </tr>
-
-    <?php foreach($unidades as $unidad): ?>
-
-    <tr>
-
-        <td><?= $unidad['id'] ?></td>
-
-        <td><?= $unidad['codigo'] ?></td>
-
-        <td><?= $unidad['placa'] ?></td>
-
-        <td><?= $unidad['tipo'] ?></td>
-
-        <td><?= $unidad['capacidad'] ?></td>
-
-        <td><?= $unidad['estado'] ?></td>
-
-        <td><?= $unidad['ruta_nombre'] ?></td>
-
-        <td><?= $unidad['estacion_base_nombre'] ?></td>
-
-        <td><?= $unidad['estacion_actual_nombre'] ?></td>
-
-        <td>
-
-            <a href="/unidades/edit/<?= $unidad['id'] ?>">
-                Editar
+            <a href="/" class="btn btn-secondary">
+                ← Dashboard
             </a>
 
-            |
-
-            <a href="/unidades/delete/<?= $unidad['id'] ?>"
-               onclick="return confirm('¿Eliminar unidad?')">
-                Eliminar
+            <a href="/unidades/create" class="btn btn-primary">
+                + Nueva Unidad
             </a>
 
-        </td>
+        </div>
 
-    </tr>
+    </div>
 
-    <?php endforeach; ?>
+    <?php if(session()->getFlashdata('success')): ?>
+        <div class="alert alert-success">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
 
-</table>
+    <?php if(session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
+
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <table class="table table-striped table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Código</th>
+                        <th>Placa</th>
+                        <th>Tipo</th>
+                        <th>Capacidad</th>
+                        <th>Estado</th>
+                        <th>Ruta</th>
+                        <th>Estación Base</th>
+                        <th>Estación Actual</th>
+                        <th>Acciones</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                <?php foreach($unidades as $unidad): ?>
+
+                    <tr>
+
+                        <td><?= $unidad['id'] ?></td>
+
+                        <td><?= $unidad['codigo'] ?></td>
+
+                        <td><?= $unidad['placa'] ?></td>
+
+                        <td><?= $unidad['tipo'] ?></td>
+
+                        <td><?= $unidad['capacidad'] ?></td>
+
+                        <td><?= $unidad['estado'] ?></td>
+
+                        <td><?= $unidad['ruta_nombre'] ?></td>
+
+                        <td><?= $unidad['estacion_base_nombre'] ?></td>
+
+                        <td><?= $unidad['estacion_actual_nombre'] ?></td>
+
+                        <td>
+
+                            <a href="/unidades/edit/<?= $unidad['id'] ?>"
+                               class="btn btn-warning btn-sm">
+                                Editar
+                            </a>
+
+                            <a href="/unidades/delete/<?= $unidad['id'] ?>"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('¿Eliminar unidad?')">
+                                Eliminar
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                <?php endforeach; ?>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
