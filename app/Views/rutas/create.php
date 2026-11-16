@@ -1,23 +1,78 @@
-<h1>Nueva Ruta</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva Ruta</title>
 
-<form action="/rutas/store" method="post">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
 
-    <label>Nombre</label>
-    <br>
+<body class="bg-light">
 
-    <input type="text" name="nombre">
+<div class="container mt-5">
 
-    <br><br>
+    <div class="card shadow-sm">
 
-    <label>Tiempo Estimado (min)</label>
-    <br>
+        <div class="card-header">
+            <h2 class="mb-0">🛣️ Nueva Ruta</h2>
+        </div>
 
-    <input type="number" name="tiempo_estimado">
+        <div class="card-body">
 
-    <br><br>
+            <form action="/rutas/store" method="post">
 
-    <button type="submit">
-        Guardar
-    </button>
+                <div class="mb-3">
 
-</form>
+                    <label class="form-label">
+                        Nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        name="nombre"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Tiempo Estimado (minutos)
+                    </label>
+
+                    <input
+                        type="number"
+                        name="tiempo_estimado"
+                        class="form-control"
+                        min="1"
+                        required>
+
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+                        Guardar
+                    </button>
+
+                    <a href="/rutas"
+                       class="btn btn-secondary">
+                        ← Volver al Listado
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
