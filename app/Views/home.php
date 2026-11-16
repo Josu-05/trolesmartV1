@@ -3,59 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <title>TroleSmart</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
 </head>
-<body>
 
-    <h1>🚎 TroleSmart</h1>
+<body class="bg-light">
 
-    <p>
-        Sistema de Gestión Operativa del Trolebús
-    </p>
+<div class="container mt-5">
 
-    <hr>
+    <div class="text-center mb-5">
+        <h1>🚎 TroleSmart</h1>
 
-    <h2>Módulos</h2>
+        <p class="text-muted">
+            Sistema de Gestión Operativa del Trolebús
+        </p>
+    </div>
 
-    <ul>
+    <div class="row g-4">
 
-        <li>
-            <a href="/rutas">
-                Gestión de Rutas
-            </a>
-        </li>
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">🛣️ Gestión de Rutas</h5>
 
-        <br>
+                    <a href="/rutas" class="btn btn-primary">
+                        Ingresar
+                    </a>
+                </div>
+            </div>
+        </div>
 
-        <li>
-            <a href="/estaciones">
-                Gestión de Estaciones
-            </a>
-        </li>
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">🚏 Gestión de Estaciones</h5>
 
-        <br>
+                    <a href="/estaciones" class="btn btn-success">
+                        Ingresar
+                    </a>
+                </div>
+            </div>
+        </div>
 
-        <li>
-            <a href="/ruta-estacion">
-                Asignación Ruta - Estación
-            </a>
-        </li>
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">🔗 Asignación Ruta - Estación</h5>
 
-        <br>
+                    <a href="/ruta-estacion" class="btn btn-warning">
+                        Ingresar
+                    </a>
+                </div>
+            </div>
+        </div>
 
-        <li>
-            <a href="/unidades">
-                Gestión de Unidades
-            </a>
-        </li>
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title">🚌 Gestión de Unidades</h5>
 
-    </ul>
+                    <a href="/unidades" class="btn btn-danger">
+                        Ingresar
+                    </a>
+                </div>
+            </div>
+        </div>
 
-    <hr>
+    </div>
 
-    <p>
-        Total de módulos implementados:
-        Rutas, Estaciones, Ruta-Estación y Unidades.
-    </p>
+    <hr class="my-5">
+
+    <div class="text-center text-muted">
+        <p>
+            Total de módulos implementados:
+            Rutas, Estaciones, Ruta-Estación y Unidades.
+        </p>
+    </div>
+
+</div>
 
 </body>
 </html>
