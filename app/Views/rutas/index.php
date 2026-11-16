@@ -1,63 +1,102 @@
-<?php if(session()->getFlashdata('success')): ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Rutas</title>
 
-    <p style="color:green;">
-        <?= session()->getFlashdata('success') ?>
-    </p>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
 
-<?php endif; ?>
+<body class="bg-light">
 
-<?php if(session()->getFlashdata('error')): ?>
+<div class="container mt-4">
 
-    <p style="color:red;">
-        <?= session()->getFlashdata('error') ?>
-    </p>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<?php endif; ?>
+        <h1>🛣️ Listado de Rutas</h1>
 
-<h1>Listado de Rutas</h1>
-
-<a href="/rutas/create">
-    Nueva Ruta
-</a>
-
-<br><br>
-
-<table border="1" cellpadding="8">
-
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Tiempo Estimado</th>
-        <th>Acciones</th>
-    </tr>
-
-    <?php foreach($rutas as $ruta): ?>
-
-    <tr>
-
-        <td><?= $ruta['id'] ?></td>
-
-        <td><?= $ruta['nombre'] ?></td>
-
-        <td><?= $ruta['tiempo_estimado'] ?> min</td>
-
-        <td>
-
-            <a href="/rutas/edit/<?= $ruta['id'] ?>">
-                Editar
+        <div>
+            <a href="/" class="btn btn-secondary">
+                ← Dashboard
             </a>
 
-            |
-
-            <a href="/rutas/delete/<?= $ruta['id'] ?>"
-               onclick="return confirm('¿Eliminar ruta?')">
-                Eliminar
+            <a href="/rutas/create" class="btn btn-primary">
+                + Nueva Ruta
             </a>
+        </div>
 
-        </td>
+    </div>
 
-    </tr>
+    <?php if(session()->getFlashdata('success')): ?>
+        <div class="alert alert-success">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
 
-    <?php endforeach; ?>
+    <?php if(session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
 
-</table>
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <table class="table table-striped table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Tiempo Estimado</th>
+                        <th>Acciones</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                <?php foreach($rutas as $ruta): ?>
+
+                    <tr>
+
+                        <td><?= $ruta['id'] ?></td>
+
+                        <td><?= $ruta['nombre'] ?></td>
+
+                        <td><?= $ruta['tiempo_estimado'] ?> min</td>
+
+                        <td>
+
+                            <a href="/rutas/edit/<?= $ruta['id'] ?>"
+                               class="btn btn-warning btn-sm">
+                                Editar
+                            </a>
+
+                            <a href="/rutas/delete/<?= $ruta['id'] ?>"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('¿Eliminar ruta?')">
+                                Eliminar
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                <?php endforeach; ?>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
