@@ -1,77 +1,127 @@
-<?php if(session()->getFlashdata('success')): ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Asignación</title>
 
-    <p style="color:green;">
-        <?= session()->getFlashdata('success') ?>
-    </p>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
 
-<?php endif; ?>
+<body class="bg-light">
 
-<?php if(session()->getFlashdata('error')): ?>
+<div class="container mt-5">
 
-    <p style="color:red;">
-        <?= session()->getFlashdata('error') ?>
-    </p>
+    <?php if(session()->getFlashdata('success')): ?>
+        <div class="alert alert-success">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
 
-<?php endif; ?>
+    <?php if(session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
 
-<h1>Editar Asignación</h1>
+    <div class="card shadow-sm">
 
-<form action="/ruta-estacion/update/<?= $asignacion['id'] ?>" method="post">
+        <div class="card-header">
+            <h2 class="mb-0">✏️ Editar Asignación</h2>
+        </div>
 
-    <label>Ruta</label>
-    <br>
+        <div class="card-body">
 
-    <select name="ruta_id">
+            <form action="/ruta-estacion/update/<?= $asignacion['id'] ?>" method="post">
 
-        <?php foreach($rutas as $ruta): ?>
+                <div class="mb-3">
 
-            <option
-                value="<?= $ruta['id'] ?>"
-                <?= ($ruta['id'] == $asignacion['ruta_id']) ? 'selected' : '' ?>>
+                    <label class="form-label">
+                        Ruta
+                    </label>
 
-                <?= $ruta['nombre'] ?>
+                    <select
+                        name="ruta_id"
+                        class="form-select"
+                        required>
 
-            </option>
+                        <?php foreach($rutas as $ruta): ?>
 
-        <?php endforeach; ?>
+                            <option
+                                value="<?= $ruta['id'] ?>"
+                                <?= ($ruta['id'] == $asignacion['ruta_id']) ? 'selected' : '' ?>>
+                                <?= $ruta['nombre'] ?>
+                            </option>
 
-    </select>
+                        <?php endforeach; ?>
 
-    <br><br>
+                    </select>
 
-    <label>Estación</label>
-    <br>
+                </div>
 
-    <select name="estacion_id">
+                <div class="mb-3">
 
-        <?php foreach($estaciones as $estacion): ?>
+                    <label class="form-label">
+                        Estación
+                    </label>
 
-            <option
-                value="<?= $estacion['id'] ?>"
-                <?= ($estacion['id'] == $asignacion['estacion_id']) ? 'selected' : '' ?>>
+                    <select
+                        name="estacion_id"
+                        class="form-select"
+                        required>
 
-                <?= $estacion['nombre'] ?>
+                        <?php foreach($estaciones as $estacion): ?>
 
-            </option>
+                            <option
+                                value="<?= $estacion['id'] ?>"
+                                <?= ($estacion['id'] == $asignacion['estacion_id']) ? 'selected' : '' ?>>
+                                <?= $estacion['nombre'] ?>
+                            </option>
 
-        <?php endforeach; ?>
+                        <?php endforeach; ?>
 
-    </select>
+                    </select>
 
-    <br><br>
+                </div>
 
-    <label>Orden de Parada</label>
-    <br>
+                <div class="mb-3">
 
-    <input
-        type="number"
-        name="orden"
-        value="<?= $asignacion['orden'] ?>">
+                    <label class="form-label">
+                        Orden de Parada
+                    </label>
 
-    <br><br>
+                    <input
+                        type="number"
+                        name="orden"
+                        value="<?= $asignacion['orden'] ?>"
+                        min="1"
+                        class="form-control"
+                        required>
 
-    <button type="submit">
-        Actualizar
-    </button>
+                </div>
 
-</form>
+                <div class="d-flex gap-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-warning">
+                        Actualizar
+                    </button>
+
+                    <a href="/ruta-estacion"
+                       class="btn btn-secondary">
+                        ← Volver al Listado
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
