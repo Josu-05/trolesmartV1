@@ -1,99 +1,144 @@
-<?php if(session()->getFlashdata('success')): ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Asignaciones Ruta - Estación</title>
 
-    <p style="color:green;">
-        <?= session()->getFlashdata('success') ?>
-    </p>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
 
-<?php endif; ?>
+<body class="bg-light">
 
-<?php if(session()->getFlashdata('error')): ?>
+<div class="container mt-4">
 
-    <p style="color:red;">
-        <?= session()->getFlashdata('error') ?>
-    </p>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<?php endif; ?>
+        <h1>🔗 Asignaciones Ruta - Estación</h1>
 
-<h1>Asignaciones Ruta - Estación</h1>
-
-<a href="/ruta-estacion/create">
-    Nueva Asignación
-</a>
-
-<br><br>
-
-<table border="1" cellpadding="8">
-
-    <tr>
-        <th>ID</th>
-        <th>Ruta</th>
-        <th>Estación</th>
-        <th>Orden</th>
-        <th>Acciones</th>
-    </tr>
-
-    <?php foreach($asignaciones as $asignacion): ?>
-
-    <tr>
-
-        <td><?= $asignacion['id'] ?></td>
-
-        <td><?= $asignacion['ruta_nombre'] ?></td>
-
-        <td><?= $asignacion['estacion_nombre'] ?></td>
-
-        <td><?= $asignacion['orden'] ?></td>
-
-        <td>
-
-            <a href="/ruta-estacion/edit/<?= $asignacion['id'] ?>">
-                Editar
+        <div>
+            <a href="/" class="btn btn-secondary">
+                ← Dashboard
             </a>
 
-            |
-
-            <a href="/ruta-estacion/delete/<?= $asignacion['id'] ?>"
-               onclick="return confirm('¿Eliminar asignación?')">
-
-                Eliminar
-
+            <a href="/ruta-estacion/create" class="btn btn-primary">
+                + Nueva Asignación
             </a>
+        </div>
 
-        </td>
+    </div>
 
-    </tr>
+    <?php if(session()->getFlashdata('success')): ?>
+        <div class="alert alert-success">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
 
-    <?php endforeach; ?>
+    <?php if(session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
 
-</table>
+    <div class="card shadow-sm mb-4">
 
-<hr>
+        <div class="card-body">
 
-<h2>Resumen de Rutas</h2>
+            <table class="table table-striped table-hover align-middle">
 
-<?php
+                <thead class="table-dark">
 
-$rutaActual = '';
+                    <tr>
+                        <th>ID</th>
+                        <th>Ruta</th>
+                        <th>Estación</th>
+                        <th>Orden</th>
+                        <th>Acciones</th>
+                    </tr>
 
-foreach($rutaCompleta as $parada):
+                </thead>
 
-    if($rutaActual != $parada['ruta_nombre']):
+                <tbody>
 
-        if($rutaActual != ''):
-            echo "<br><br>";
-        endif;
+                <?php foreach($asignaciones as $asignacion): ?>
 
-        $rutaActual = $parada['ruta_nombre'];
+                    <tr>
 
-?>
+                        <td><?= $asignacion['id'] ?></td>
 
-<h3><?= $rutaActual ?></h3>
+                        <td><?= $asignacion['ruta_nombre'] ?></td>
 
-<?php endif; ?>
+                        <td><?= $asignacion['estacion_nombre'] ?></td>
 
-→ <?= $parada['orden'] ?>.
-<?= $parada['estacion_nombre'] ?>
+                        <td><?= $asignacion['orden'] ?></td>
 
-<br>
+                        <td>
 
-<?php endforeach; ?>
+                            <a href="/ruta-estacion/edit/<?= $asignacion['id'] ?>"
+                               class="btn btn-warning btn-sm">
+                                Editar
+                            </a>
+
+                            <a href="/ruta-estacion/delete/<?= $asignacion['id'] ?>"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('¿Eliminar asignación?')">
+                                Eliminar
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                <?php endforeach; ?>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-sm">
+
+        <div class="card-header">
+            <h4 class="mb-0">📍 Resumen de Rutas</h4>
+        </div>
+
+        <div class="card-body">
+
+            <?php
+            $rutaActual = '';
+
+            foreach($rutaCompleta as $parada):
+
+                if($rutaActual != $parada['ruta_nombre']):
+
+                    if($rutaActual != ''):
+                        echo '<hr>';
+                    endif;
+
+                    $rutaActual = $parada['ruta_nombre'];
+            ?>
+
+                <h5 class="mt-3">
+                    <?= $rutaActual ?>
+                </h5>
+
+            <?php endif; ?>
+
+                <div>
+                    → <?= $parada['orden'] ?>.
+                    <?= $parada['estacion_nombre'] ?>
+                </div>
+
+            <?php endforeach; ?>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
