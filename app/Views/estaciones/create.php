@@ -1,23 +1,77 @@
-<h1>Nueva Estación</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva Estación</title>
 
-<form action="/estaciones/store" method="post">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
 
-    <label>Nombre</label>
-    <br>
+<body class="bg-light">
 
-    <input type="text" name="nombre">
+<div class="container mt-5">
 
-    <br><br>
+    <div class="card shadow-sm">
 
-    <label>Ubicación</label>
-    <br>
+        <div class="card-header">
+            <h2 class="mb-0">🚏 Nueva Estación</h2>
+        </div>
 
-    <input type="text" name="ubicacion">
+        <div class="card-body">
 
-    <br><br>
+            <form action="/estaciones/store" method="post">
 
-    <button type="submit">
-        Guardar
-    </button>
+                <div class="mb-3">
 
-</form>
+                    <label class="form-label">
+                        Nombre
+                    </label>
+
+                    <input
+                        type="text"
+                        name="nombre"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Ubicación
+                    </label>
+
+                    <input
+                        type="text"
+                        name="ubicacion"
+                        class="form-control"
+                        required>
+
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+                        Guardar
+                    </button>
+
+                    <a href="/estaciones"
+                       class="btn btn-secondary">
+                        ← Volver al Listado
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
