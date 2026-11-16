@@ -1,106 +1,185 @@
-<h1>Nueva Unidad</h1>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva Unidad</title>
 
-<?php if(session()->getFlashdata('error')): ?>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
 
-    <p style="color:red;">
-        <?= session()->getFlashdata('error') ?>
-    </p>
+<body class="bg-light">
 
-<?php endif; ?>
+<div class="container mt-5">
 
-<form action="/unidades/store" method="post">
+    <?php if(session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
 
-    <label>Código</label>
-    <br>
-    <input type="text" name="codigo">
-    <br><br>
+    <div class="card shadow-sm">
 
-    <label>Placa</label>
-    <br>
-    <input type="text" name="placa">
-    <br><br>
+        <div class="card-header">
+            <h2 class="mb-0">🚌 Nueva Unidad</h2>
+        </div>
 
-    <label>Tipo</label>
-    <br>
+        <div class="card-body">
 
-    <select name="tipo">
-        <option value="Regular">Regular</option>
-        <option value="Expreso">Expreso</option>
-    </select>
+            <form action="/unidades/store" method="post">
 
-    <br><br>
+                <div class="mb-3">
+                    <label class="form-label">Código</label>
 
-    <label>Capacidad</label>
-    <br>
-    <input type="number" name="capacidad">
-    <br><br>
+                    <input
+                        type="text"
+                        name="codigo"
+                        class="form-control"
+                        required>
+                </div>
 
-    <label>Estado</label>
-    <br>
+                <div class="mb-3">
+                    <label class="form-label">Placa</label>
 
-    <select name="estado">
-        <option value="Disponible">Disponible</option>
-        <option value="En servicio">En servicio</option>
-        <option value="Mantenimiento">Mantenimiento</option>
-        <option value="Dañada">Dañada</option>
-        <option value="Fuera de servicio">Fuera de servicio</option>
-    </select>
+                    <input
+                        type="text"
+                        name="placa"
+                        class="form-control"
+                        required>
+                </div>
 
-    <br><br>
+                <div class="mb-3">
+                    <label class="form-label">Tipo</label>
 
-    <label>Ruta Asignada</label>
-    <br>
+                    <select
+                        name="tipo"
+                        class="form-select"
+                        required>
 
-    <select name="ruta_id" required>
+                        <option value="Regular">
+                            Regular
+                        </option>
 
-        <?php foreach($rutas as $ruta): ?>
+                        <option value="Expreso">
+                            Expreso
+                        </option>
 
-            <option value="<?= $ruta['id'] ?>">
-                <?= $ruta['nombre'] ?>
-            </option>
+                    </select>
+                </div>
 
-        <?php endforeach; ?>
+                <div class="mb-3">
+                    <label class="form-label">Capacidad</label>
 
-    </select>
+                    <input
+                        type="number"
+                        name="capacidad"
+                        min="1"
+                        class="form-control"
+                        required>
+                </div>
 
-    <br><br>
+                <div class="mb-3">
+                    <label class="form-label">Estado</label>
 
-    <label>Estación Base</label>
-    <br>
+                    <select
+                        name="estado"
+                        class="form-select"
+                        required>
 
-    <select name="estacion_base_id" required>
+                        <option value="Disponible">Disponible</option>
+                        <option value="En servicio">En servicio</option>
+                        <option value="Mantenimiento">Mantenimiento</option>
+                        <option value="Dañada">Dañada</option>
+                        <option value="Fuera de servicio">Fuera de servicio</option>
 
-        <?php foreach($estaciones as $estacion): ?>
+                    </select>
+                </div>
 
-            <option value="<?= $estacion['id'] ?>">
-                <?= $estacion['nombre'] ?>
-            </option>
+                <div class="mb-3">
+                    <label class="form-label">
+                        Ruta Asignada
+                    </label>
 
-        <?php endforeach; ?>
+                    <select
+                        name="ruta_id"
+                        class="form-select"
+                        required>
 
-    </select>
+                        <?php foreach($rutas as $ruta): ?>
 
-    <br><br>
+                            <option value="<?= $ruta['id'] ?>">
+                                <?= $ruta['nombre'] ?>
+                            </option>
 
-    <label>Estación Actual</label>
-    <br>
+                        <?php endforeach; ?>
 
-    <select name="estacion_actual_id" required>
+                    </select>
+                </div>
 
-        <?php foreach($estaciones as $estacion): ?>
+                <div class="mb-3">
+                    <label class="form-label">
+                        Estación Base
+                    </label>
 
-            <option value="<?= $estacion['id'] ?>">
-                <?= $estacion['nombre'] ?>
-            </option>
+                    <select
+                        name="estacion_base_id"
+                        class="form-select"
+                        required>
 
-        <?php endforeach; ?>
+                        <?php foreach($estaciones as $estacion): ?>
 
-    </select>
+                            <option value="<?= $estacion['id'] ?>">
+                                <?= $estacion['nombre'] ?>
+                            </option>
 
-    <br><br>
+                        <?php endforeach; ?>
 
-    <button type="submit">
-        Guardar
-    </button>
+                    </select>
+                </div>
 
-</form>
+                <div class="mb-3">
+                    <label class="form-label">
+                        Estación Actual
+                    </label>
+
+                    <select
+                        name="estacion_actual_id"
+                        class="form-select"
+                        required>
+
+                        <?php foreach($estaciones as $estacion): ?>
+
+                            <option value="<?= $estacion['id'] ?>">
+                                <?= $estacion['nombre'] ?>
+                            </option>
+
+                        <?php endforeach; ?>
+
+                    </select>
+                </div>
+
+                <div class="d-flex gap-2">
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary">
+                        Guardar
+                    </button>
+
+                    <a href="/unidades"
+                       class="btn btn-secondary">
+                        ← Volver al Listado
+                    </a>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
