@@ -1,63 +1,102 @@
-<?php if(session()->getFlashdata('success')): ?>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Estaciones</title>
 
-    <p style="color:green;">
-        <?= session()->getFlashdata('success') ?>
-    </p>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+</head>
 
-<?php endif; ?>
+<body class="bg-light">
 
-<?php if(session()->getFlashdata('error')): ?>
+<div class="container mt-4">
 
-    <p style="color:red;">
-        <?= session()->getFlashdata('error') ?>
-    </p>
+    <div class="d-flex justify-content-between align-items-center mb-4">
 
-<?php endif; ?>
+        <h1>🚏 Listado de Estaciones</h1>
 
-<h1>Listado de Estaciones</h1>
-
-<a href="/estaciones/create">
-    Nueva Estación
-</a>
-
-<br><br>
-
-<table border="1" cellpadding="8">
-
-    <tr>
-        <th>ID</th>
-        <th>Nombre</th>
-        <th>Ubicación</th>
-        <th>Acciones</th>
-    </tr>
-
-    <?php foreach($estaciones as $estacion): ?>
-
-    <tr>
-
-        <td><?= $estacion['id'] ?></td>
-
-        <td><?= $estacion['nombre'] ?></td>
-
-        <td><?= $estacion['ubicacion'] ?></td>
-
-        <td>
-
-            <a href="/estaciones/edit/<?= $estacion['id'] ?>">
-                Editar
+        <div>
+            <a href="/" class="btn btn-secondary">
+                ← Dashboard
             </a>
 
-            |
-
-            <a href="/estaciones/delete/<?= $estacion['id'] ?>"
-               onclick="return confirm('¿Eliminar estación?')">
-                Eliminar
+            <a href="/estaciones/create" class="btn btn-success">
+                + Nueva Estación
             </a>
+        </div>
 
-        </td>
+    </div>
 
-    </tr>
+    <?php if(session()->getFlashdata('success')): ?>
+        <div class="alert alert-success">
+            <?= session()->getFlashdata('success') ?>
+        </div>
+    <?php endif; ?>
 
-    <?php endforeach; ?>
+    <?php if(session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger">
+            <?= session()->getFlashdata('error') ?>
+        </div>
+    <?php endif; ?>
 
-</table>
+    <div class="card shadow-sm">
+
+        <div class="card-body">
+
+            <table class="table table-striped table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Ubicación</th>
+                        <th>Acciones</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                <?php foreach($estaciones as $estacion): ?>
+
+                    <tr>
+
+                        <td><?= $estacion['id'] ?></td>
+
+                        <td><?= $estacion['nombre'] ?></td>
+
+                        <td><?= $estacion['ubicacion'] ?></td>
+
+                        <td>
+
+                            <a href="/estaciones/edit/<?= $estacion['id'] ?>"
+                               class="btn btn-warning btn-sm">
+                                Editar
+                            </a>
+
+                            <a href="/estaciones/delete/<?= $estacion['id'] ?>"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('¿Eliminar estación?')">
+                                Eliminar
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                <?php endforeach; ?>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>
